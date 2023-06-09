@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //texts
     private TextView eredmeny;
+    private TextView jatekSzama;
+    private TextView wins;
 
 
     //Buttons
@@ -37,6 +39,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private String nyertesKartya;
+
+    private boolean nyitva;
+
+    private int nyeresekSzama;
+    private int jatekokSzamaInt;
 
 
     //Main
@@ -59,16 +66,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //megtart gomb
         megtart = findViewById(R.id.megtartBtn);
+        megtart.setOnClickListener(this);
 
         //csere gomb
         csere = findViewById(R.id.csereBtn);
+        csere.setOnClickListener(this);
 
         //kivalaszt gomb
         kivalaszt = findViewById(R.id.kivalasztBtn);
         kivalaszt.setOnClickListener(this);
 
+        //eredmenyText
+        eredmeny = findViewById(R.id.eredmenyText);
+
+        //jatek szama
+        jatekSzama = findViewById(R.id.jatekSzamaText);
+
+        //wins
+        wins = findViewById(R.id.nyeresekSzamaText);
 
         selected = "nincs";
+        nyitva = false;
 
         String[] valasztek = {"left", "middle", "right"};
         Random random = new Random();
@@ -81,33 +99,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.leftImg) {
-            setEmptyView();
-            Toast.makeText(this, "bal", Toast.LENGTH_SHORT).show();
-            left.setImageResource(R.mipmap.kijelolt);
-            selected = "left";
+        if(!nyitva){
+            if (view.getId() == R.id.leftImg) {
+                setEmptyView();
+                Toast.makeText(this, "bal", Toast.LENGTH_SHORT).show();
+                left.setImageResource(R.mipmap.kijelolt);
+                selected = "left";
 
-        } else if (view.getId() == R.id.middleImg) {
-            setEmptyView();
-            Toast.makeText(this, "kozepso", Toast.LENGTH_SHORT).show();
-            middle.setImageResource(R.mipmap.kijelolt);
-            selected = "middle";
-        } else if (view.getId() == R.id.rightImg) {
-            setEmptyView();
-            Toast.makeText(this, "jobb", Toast.LENGTH_SHORT).show();
-            right.setImageResource(R.mipmap.kijelolt);
-            selected = "right";
-        } else if (view.getId() == R.id.kivalasztBtn) {
+            } else if (view.getId() == R.id.middleImg) {
+                setEmptyView();
+                Toast.makeText(this, "kozepso", Toast.LENGTH_SHORT).show();
+                middle.setImageResource(R.mipmap.kijelolt);
+                selected = "middle";
+            } else if (view.getId() == R.id.rightImg) {
+                setEmptyView();
+                Toast.makeText(this, "jobb", Toast.LENGTH_SHORT).show();
+                right.setImageResource(R.mipmap.kijelolt);
+                selected = "right";
+            } else if (view.getId() == R.id.kivalasztBtn) {
 
-            if (selected.equals( "nincs")) {
-                Toast.makeText(this, "Plese select", Toast.LENGTH_SHORT).show();
-            } else {
-                //kinyit()
-                Kinyit();
-                //Toast.makeText(this,"kinyit",Toast.LENGTH_SHORT).show();
+                if (selected.equals( "nincs")) {
+                    Toast.makeText(this, "Plese select", Toast.LENGTH_SHORT).show();
+                } else {
+                    //kinyit()
+                    Kinyit();
+                    nyitva = true;
+                    //Toast.makeText(this,"kinyit",Toast.LENGTH_SHORT).show();
 
+                }
             }
+
         }
+        //masodik fazis
+        else{
+            if (view.getId() == R.id.megtartBtn){
+                Megtart();
+                UjJatek();
+            }
+            else if(view.getId() == R.id.csereBtn){
+                Csere();
+                UjJatek();
+            }
+
+
+
+
+        }
+
+
 
 
         //Toast.makeText(this,"Plese select",Toast.LENGTH_SHORT).show();
@@ -148,6 +187,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    public void Megtart(){
+        jatekokSzamaInt++;
+        if(nyertesKartya.equals(selected)){
+            nyeresekSzama++;
+        }
+        setAllKecske();
+
+        if(nyertesKartya.equals("left")){
+            left.setImageResource(R.mipmap.kocsi);
+        } else if (nyertesKartya.equals("middle")) {
+            middle.setImageResource(R.mipmap.kocsi);
+
+        } else if (nyertesKartya.equals("right")) {
+            right.setImageResource(R.mipmap.kocsi);
+
+        }
+
+    }
+
+    public void Csere(){
+        jatekokSzamaInt++;
+        if( !(nyertesKartya.equals(selected))){
+            nyeresekSzama++;
+        }
+        setAllKecske();
+        if(nyertesKartya.equals("left")){
+            left.setImageResource(R.mipmap.kocsi);
+        } else if (nyertesKartya.equals("middle")) {
+            middle.setImageResource(R.mipmap.kocsi);
+
+        } else if (nyertesKartya.equals("right")) {
+            right.setImageResource(R.mipmap.kocsi);
+
+        }
+
+
+    }
+
+
+    public void UjJatek(){
+        selected = "nincs";
+        nyitva = false;
+        String jtk = "Jatekok szama: " + jatekokSzamaInt;
+        jatekSzama.setText(jtk);
+        String winks = "Wins: "+nyeresekSzama;
+        wins.setText(winks);
+
+
+        String[] valasztek = {"left", "middle", "right"};
+        Random random = new Random();
+        nyertesSzam = random.nextInt(3);
+        nyertesKartya = valasztek[nyertesSzam];
+
+
+    }
+
 
 
 
@@ -156,6 +251,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         left.setImageResource(R.mipmap.megforditott);
         middle.setImageResource(R.mipmap.megforditott);
         right.setImageResource(R.mipmap.megforditott);
+
+    }
+
+    public void setAllKecske(){
+        left.setImageResource(R.mipmap.kecske);
+        middle.setImageResource(R.mipmap.kecske);
+        right.setImageResource(R.mipmap.kecske);
+
 
     }
 }
