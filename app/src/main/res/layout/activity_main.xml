@@ -95,4 +95,13 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
 
+    <Button
+        android:id="@+id/kivalasztBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kivalaszt"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
