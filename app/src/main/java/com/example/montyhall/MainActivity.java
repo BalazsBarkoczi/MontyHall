@@ -2,7 +2,9 @@ package com.example.montyhall;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
@@ -10,15 +12,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //Lista
+    public ArrayList<Kartya> kartyak;
 
     //kepek
-    private ImageView left;
-    private ImageView middle;
-    private ImageView right;
+
+    public static ImageView left;
+    public static ImageView middle;
+    public static ImageView right;
 
     //texts
     private TextView eredmeny;
@@ -30,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button csere;
     private Button megtart;
     private Button kivalaszt;
+    private Button reset;
 
     //bool valtozo
     private String selected;
@@ -40,10 +47,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private String nyertesKartya;
 
-    private boolean nyitva;
+    public static boolean nyitva;
 
     private int nyeresekSzama;
     private int jatekokSzamaInt;
+
+    private Kezelo kezelo;
 
 
     //Main
@@ -76,6 +85,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         kivalaszt = findViewById(R.id.kivalasztBtn);
         kivalaszt.setOnClickListener(this);
 
+        //reset gomb
+        reset = findViewById(R.id.resetBtn);
+        reset.setOnClickListener(this);
+
         //eredmenyText
         eredmeny = findViewById(R.id.eredmenyText);
 
@@ -88,10 +101,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         selected = "nincs";
         nyitva = false;
 
-        String[] valasztek = {"left", "middle", "right"};
+        kezelo = new Kezelo();
         Random random = new Random();
         nyertesSzam = random.nextInt(3);
-        nyertesKartya = valasztek[nyertesSzam];
+        kezelo.setNyertes(nyertesSzam);
+        //nyertesKartya = valasztek[nyertesSzam];
+
+
+
 
 
     }
@@ -99,6 +116,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        ////uj
+        if(!nyitva) {
+            if (view.getId() == R.id.leftImg) {
+                kezelo.setUnselected();
+                kezelo.Select(0);
+                kezelo.AllKirajzol();
+            } else if (view.getId() == R.id.middleImg) {
+                kezelo.setUnselected();
+                kezelo.Select(1);
+                kezelo.AllKirajzol();
+
+            } else if (view.getId() == R.id.rightImg) {
+                kezelo.setUnselected();
+                kezelo.Select(2);
+                kezelo.AllKirajzol();
+            } else if (view.getId() == R.id.kivalasztBtn) {
+                if (!kezelo.isVanSelected()) {
+                    Toast.makeText(this, "Plese select", Toast.LENGTH_SHORT).show();
+                } else {
+                    kezelo.Kivalasztas();
+                    nyitva = true;
+                }
+            }
+        }
+
+
+
+
+        /*
+        /////////regi
         if(!nyitva){
             if (view.getId() == R.id.leftImg) {
                 setEmptyView();
@@ -141,9 +188,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UjJatek();
             }
 
-
-
-
+        }
+        if(view.getId() == R.id.resetBtn){
+            jatekokSzamaInt = 0;
+            nyeresekSzama = 0;
+            UjJatek();
+            setEmptyView();
         }
 
 
@@ -151,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Toast.makeText(this,"Plese select",Toast.LENGTH_SHORT).show();
 
-
+        */
     }
 
 
@@ -188,30 +238,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void Megtart(){
+        SystemClock.sleep(1000);
         jatekokSzamaInt++;
         if(nyertesKartya.equals(selected)){
             nyeresekSzama++;
         }
         setAllKecske();
+        SetCards();
 
-        if(nyertesKartya.equals("left")){
-            left.setImageResource(R.mipmap.kocsi);
-        } else if (nyertesKartya.equals("middle")) {
-            middle.setImageResource(R.mipmap.kocsi);
+        //kivalasztani a kivalaszottat
+        if(selected.equals(nyertesKartya)){
+            if(nyertesKartya.equals("left")){
+                left.setImageResource(R.mipmap.kocsiselected);
+            } else if (nyertesKartya.equals("middle")) {
+                middle.setImageResource(R.mipmap.kocsiselected);
 
-        } else if (nyertesKartya.equals("right")) {
-            right.setImageResource(R.mipmap.kocsi);
+            } else if (nyertesKartya.equals("right")) {
+                right.setImageResource(R.mipmap.kocsiselected);
+
+            }
 
         }
+        else{
+            if(selected.equals("left")){
+                left.setImageResource(R.mipmap.kecskeselected);
+            }
+            else if(selected.equals("middle")){
+                middle.setImageResource(R.mipmap.kecskeselected);
+            }
+            else if(selected.equals("right")){
+                right.setImageResource(R.mipmap.kecskeselected);
+            }
+        }
+
 
     }
 
     public void Csere(){
+        SystemClock.sleep(1000);
         jatekokSzamaInt++;
         if( !(nyertesKartya.equals(selected))){
             nyeresekSzama++;
         }
+        //cserelni a kivalasztast
+
         setAllKecske();
+        SetCards();
+
+
+
+
+
+
+        //////////////
+
+
+
+
+
+
+
+    }
+
+    public void SetCards(){
         if(nyertesKartya.equals("left")){
             left.setImageResource(R.mipmap.kocsi);
         } else if (nyertesKartya.equals("middle")) {
@@ -224,6 +313,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+
 
 
     public void UjJatek(){
