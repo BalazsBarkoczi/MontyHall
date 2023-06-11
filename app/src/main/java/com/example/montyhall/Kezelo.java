@@ -12,9 +12,9 @@ public class Kezelo {
         kartyak = new ArrayList<>();
         vanSelected = false;
         //ird at
-        kartyak.add(new Left("left"));
-        kartyak.add(new Middle("middle"));
-        kartyak.add(new Right("right"));
+        kartyak.add(new Left());
+        kartyak.add(new Middle());
+        kartyak.add(new Right());
     }
 
 
@@ -67,8 +67,6 @@ public class Kezelo {
         }
 
     }
-
-    public void Megtart(){}
 
 
     //amikor kivalasztas van random kinyit egy kecsket

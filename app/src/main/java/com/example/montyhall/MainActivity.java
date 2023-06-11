@@ -21,30 +21,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //kepek
 
+    @SuppressLint("StaticFieldLeak")
     public static ImageView left;
+    @SuppressLint("StaticFieldLeak")
     public static ImageView middle;
+    @SuppressLint("StaticFieldLeak")
     public static ImageView right;
 
     //texts
+    @SuppressLint("StaticFieldLeak")
     public static TextView eredmeny;
     private TextView jatekSzama;
     private TextView wins;
 
 
-    //Buttons
-    private Button csere;
-    private Button megtart;
-    private Button kivalaszt;
-    private Button reset;
-
-    //bool valtozo
-    private String selected;
-
 
     private int nyertesSzam;
 
-
-
+    
 
     public static boolean nyitva;
 
@@ -74,19 +68,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         right.setOnClickListener(this);
 
         //megtart gomb
-        megtart = findViewById(R.id.megtartBtn);
+        Button megtart = findViewById(R.id.megtartBtn);
         megtart.setOnClickListener(this);
 
         //csere gomb
-        csere = findViewById(R.id.csereBtn);
+        Button csere = findViewById(R.id.csereBtn);
         csere.setOnClickListener(this);
 
         //kivalaszt gomb
-        kivalaszt = findViewById(R.id.kivalasztBtn);
+        Button kivalaszt = findViewById(R.id.kivalasztBtn);
         kivalaszt.setOnClickListener(this);
 
         //reset gomb
-        reset = findViewById(R.id.resetBtn);
+        Button reset = findViewById(R.id.resetBtn);
         reset.setOnClickListener(this);
 
         //eredmenyText
@@ -98,27 +92,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //wins
         wins = findViewById(R.id.nyeresekSzamaText);
 
-        selected = "nincs";
+        //kezdeti beallitasok
         nyitva = false;
-
         kezelo = new Kezelo();
         Random random = new Random();
         nyertesSzam = random.nextInt(3);
         kezelo.setNyertes(nyertesSzam);
-        //nyertesKartya = valasztek[nyertesSzam];
-
         ujJatek = false;
-
-
-
-
 
     }
 
 
     @Override
     public void onClick(View view) {
-        ////uj
+
+        //elso fazis
         if(!nyitva) {
             if(!ujJatek){
                 ujJatek = true;
@@ -149,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
+
+        //masodik fazis
         else{
 
             //megtart
@@ -181,7 +171,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         wins.setText(winks);
 
 
-
         Random random = new Random();
         nyertesSzam = random.nextInt(3);
         kezelo.UjJatek();
@@ -192,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @SuppressLint("SetTextI18n")
     public void Reset(){
         UjJatek();
         nyeresekSzama = 0;
@@ -201,9 +191,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         wins.setText("Wins: ");
 
     }
-
-
-
 
 
     public void setEmptyView(){

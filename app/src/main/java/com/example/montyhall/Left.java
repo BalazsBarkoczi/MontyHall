@@ -2,8 +2,8 @@ package com.example.montyhall;
 
 public class Left extends Kartya{
 
-    public Left(String fajta){
-        super(fajta);
+    public Left(){
+
 
     }
 
@@ -13,7 +13,7 @@ public class Left extends Kartya{
             if(!selected){
                 MainActivity.left.setImageResource(R.mipmap.megforditott);
             }
-            else if(selected) {
+            else  {
                 MainActivity.left.setImageResource(R.mipmap.kijelolt);
             }
         }

@@ -1,18 +1,19 @@
 package com.example.montyhall;
 
-public class Middle extends Kartya{
-    public Middle(String fajta){
-        super(fajta);
+import android.annotation.SuppressLint;
 
+public class Middle extends Kartya{
+    public Middle(){
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void Kirajzol() {
         if(!MainActivity.nyitva){
             if(!selected){
                 MainActivity.middle.setImageResource(R.mipmap.megforditott);
             }
-            else if(selected){
+            else {
                 MainActivity.middle.setImageResource(R.mipmap.kijelolt);
             }
         }

@@ -1,19 +1,19 @@
 package com.example.montyhall;
 
+import android.annotation.SuppressLint;
+
 public class Right extends Kartya{
-    public Right(String fajta){
-        super(fajta);
-
-
+    public Right(){
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void Kirajzol() {
         if(!MainActivity.nyitva){
             if(!selected){
                 MainActivity.right.setImageResource(R.mipmap.megforditott);
             }
-            else if(selected){
+            else {
                 MainActivity.right.setImageResource(R.mipmap.kijelolt);
             }
         }

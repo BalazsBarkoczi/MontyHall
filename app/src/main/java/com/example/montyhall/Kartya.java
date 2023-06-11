@@ -5,14 +5,12 @@ public abstract class Kartya {
     protected boolean nyertes;
     protected boolean nyitott;
 
-    private String fajta;
 
-    public Kartya(String fajta){
+
+    public Kartya(){
         selected = false;
         nyertes = false;
         nyitott = false;
-        this.fajta = fajta;
-
 
     }
 
