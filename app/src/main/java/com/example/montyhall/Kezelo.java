@@ -31,6 +31,29 @@ public class Kezelo {
         }
     }
 
+    public void Csere(){
+
+        for(Kartya kartya : kartyak){
+            if(!kartya.isNyitott() && !kartya.isSelected()  ){
+                setUnselected();
+                kartya.select();
+                System.out.println("csere megtortent");
+                break;
+            }
+
+        }
+
+    }
+
+    public void UjJatek(){
+        for(Kartya kartya : kartyak){
+            kartya.deSelect();
+            kartya.deNyertes();
+            kartya.deNyitott();
+        }
+
+    }
+
 
     //select kartya
     public void Select(int index){
@@ -44,6 +67,8 @@ public class Kezelo {
         }
 
     }
+
+    public void Megtart(){}
 
 
     //amikor kivalasztas van random kinyit egy kecsket

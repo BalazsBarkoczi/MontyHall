@@ -17,8 +17,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //Lista
-    public ArrayList<Kartya> kartyak;
+
 
     //kepek
 
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static ImageView right;
 
     //texts
-    private TextView eredmeny;
+    public static TextView eredmeny;
     private TextView jatekSzama;
     private TextView wins;
 
@@ -45,14 +44,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int nyertesSzam;
 
 
-    private String nyertesKartya;
+
 
     public static boolean nyitva;
 
-    private int nyeresekSzama;
-    private int jatekokSzamaInt;
+    public static int nyeresekSzama;
+    public static int jatekokSzamaInt;
 
     private Kezelo kezelo;
+    private boolean ujJatek;
 
 
     //Main
@@ -107,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         kezelo.setNyertes(nyertesSzam);
         //nyertesKartya = valasztek[nyertesSzam];
 
+        ujJatek = false;
+
 
 
 
@@ -118,7 +120,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         ////uj
         if(!nyitva) {
+            if(!ujJatek){
+                ujJatek = true;
+                setEmptyView();
+                eredmeny.setText("");
+            }
             if (view.getId() == R.id.leftImg) {
+
+
                 kezelo.setUnselected();
                 kezelo.Select(0);
                 kezelo.AllKirajzol();
@@ -140,185 +149,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
-
-
-
-
-        /*
-        /////////regi
-        if(!nyitva){
-            if (view.getId() == R.id.leftImg) {
-                setEmptyView();
-                Toast.makeText(this, "bal", Toast.LENGTH_SHORT).show();
-                left.setImageResource(R.mipmap.kijelolt);
-                selected = "left";
-
-            } else if (view.getId() == R.id.middleImg) {
-                setEmptyView();
-                Toast.makeText(this, "kozepso", Toast.LENGTH_SHORT).show();
-                middle.setImageResource(R.mipmap.kijelolt);
-                selected = "middle";
-            } else if (view.getId() == R.id.rightImg) {
-                setEmptyView();
-                Toast.makeText(this, "jobb", Toast.LENGTH_SHORT).show();
-                right.setImageResource(R.mipmap.kijelolt);
-                selected = "right";
-            } else if (view.getId() == R.id.kivalasztBtn) {
-
-                if (selected.equals( "nincs")) {
-                    Toast.makeText(this, "Plese select", Toast.LENGTH_SHORT).show();
-                } else {
-                    //kinyit()
-                    Kinyit();
-                    nyitva = true;
-                    //Toast.makeText(this,"kinyit",Toast.LENGTH_SHORT).show();
-
-                }
-            }
-
-        }
-        //masodik fazis
         else{
-            if (view.getId() == R.id.megtartBtn){
-                Megtart();
-                UjJatek();
-            }
-            else if(view.getId() == R.id.csereBtn){
-                Csere();
-                UjJatek();
-            }
 
+            //megtart
+            if(view.getId() == R.id.megtartBtn){
+                kezelo.AllKirajzol();
+                jatekokSzamaInt++;
+                UjJatek();
+
+            }
+            //csere
+            else if(view.getId() == R.id.csereBtn){
+                kezelo.Csere();
+                kezelo.AllKirajzol();
+                jatekokSzamaInt++;
+                UjJatek();
+            }
         }
         if(view.getId() == R.id.resetBtn){
-            jatekokSzamaInt = 0;
-            nyeresekSzama = 0;
-            UjJatek();
-            setEmptyView();
-        }
-
-
-
-
-        //Toast.makeText(this,"Plese select",Toast.LENGTH_SHORT).show();
-
-        */
-    }
-
-
-
-    public void Kinyit(){
-
-        if(selected.equals( "left")){
-            //ha eltalta a baloldalit
-            if(nyertesKartya.equals( selected) || nyertesKartya.equals( "middle")){
-                //jobb oldali kinyit
-                right.setImageResource(R.mipmap.kecske);
-            }
-            else{
-                middle.setImageResource(R.mipmap.kecske);
-            }
-        }
-        else if(selected.equals( "middle")){
-            if(nyertesKartya.equals( selected) || nyertesKartya.equals( "left")){
-                right.setImageResource(R.mipmap.kecske);
-            }
-            else{
-                left.setImageResource(R.mipmap.kecske);
-            }
-        }
-        else if(selected.equals( "right")){
-            if(selected.equals( nyertesKartya) || nyertesKartya.equals( "middle")){
-                left.setImageResource(R.mipmap.kecske);
-            }
-            else{
-                middle.setImageResource(R.mipmap.kecske);
-            }
+            Reset();
         }
 
     }
-
-    public void Megtart(){
-        SystemClock.sleep(1000);
-        jatekokSzamaInt++;
-        if(nyertesKartya.equals(selected)){
-            nyeresekSzama++;
-        }
-        setAllKecske();
-        SetCards();
-
-        //kivalasztani a kivalaszottat
-        if(selected.equals(nyertesKartya)){
-            if(nyertesKartya.equals("left")){
-                left.setImageResource(R.mipmap.kocsiselected);
-            } else if (nyertesKartya.equals("middle")) {
-                middle.setImageResource(R.mipmap.kocsiselected);
-
-            } else if (nyertesKartya.equals("right")) {
-                right.setImageResource(R.mipmap.kocsiselected);
-
-            }
-
-        }
-        else{
-            if(selected.equals("left")){
-                left.setImageResource(R.mipmap.kecskeselected);
-            }
-            else if(selected.equals("middle")){
-                middle.setImageResource(R.mipmap.kecskeselected);
-            }
-            else if(selected.equals("right")){
-                right.setImageResource(R.mipmap.kecskeselected);
-            }
-        }
-
-
-    }
-
-    public void Csere(){
-        SystemClock.sleep(1000);
-        jatekokSzamaInt++;
-        if( !(nyertesKartya.equals(selected))){
-            nyeresekSzama++;
-        }
-        //cserelni a kivalasztast
-
-        setAllKecske();
-        SetCards();
-
-
-
-
-
-
-        //////////////
-
-
-
-
-
-
-
-    }
-
-    public void SetCards(){
-        if(nyertesKartya.equals("left")){
-            left.setImageResource(R.mipmap.kocsi);
-        } else if (nyertesKartya.equals("middle")) {
-            middle.setImageResource(R.mipmap.kocsi);
-
-        } else if (nyertesKartya.equals("right")) {
-            right.setImageResource(R.mipmap.kocsi);
-
-        }
-
-
-    }
-
-
-
 
     public void UjJatek(){
-        selected = "nincs";
+
         nyitva = false;
         String jtk = "Jatekok szama: " + jatekokSzamaInt;
         jatekSzama.setText(jtk);
@@ -326,11 +181,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         wins.setText(winks);
 
 
-        String[] valasztek = {"left", "middle", "right"};
+
         Random random = new Random();
         nyertesSzam = random.nextInt(3);
-        nyertesKartya = valasztek[nyertesSzam];
+        kezelo.UjJatek();
 
+        kezelo.setNyertes(nyertesSzam);
+        ujJatek = false;
+        kezelo.setVanSelected(false);
+
+    }
+
+    public void Reset(){
+        UjJatek();
+        nyeresekSzama = 0;
+        jatekokSzamaInt = 0;
+        eredmeny.setText("");
+        jatekSzama.setText("Jatekok szama: ");
+        wins.setText("Wins: ");
 
     }
 
@@ -345,11 +213,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void setAllKecske(){
-        left.setImageResource(R.mipmap.kecske);
-        middle.setImageResource(R.mipmap.kecske);
-        right.setImageResource(R.mipmap.kecske);
 
-
-    }
 }

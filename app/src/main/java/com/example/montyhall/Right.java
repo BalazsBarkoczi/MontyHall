@@ -17,6 +17,30 @@ public class Right extends Kartya{
                 MainActivity.right.setImageResource(R.mipmap.kijelolt);
             }
         }
+        else {
+            if(!selected){
+                //kocsi
+                if(isNyertes()){
+                    MainActivity.right.setImageResource(R.mipmap.kocsi);
+                }
+                else{
+                    MainActivity.right.setImageResource(R.mipmap.kecske);
+                }
+            }
+
+            else{
+                if(isNyertes()){
+                    MainActivity.right.setImageResource(R.mipmap.kocsiselected);
+                    MainActivity.nyeresekSzama++;
+                    MainActivity.eredmeny.setText("Win");
+
+                }
+                else {
+                    MainActivity.right.setImageResource(R.mipmap.kecskeselected);
+                    MainActivity.eredmeny.setText("Lose");
+                }
+            }
+        }
     }
 
 

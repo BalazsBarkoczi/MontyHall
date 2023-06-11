@@ -16,6 +16,29 @@ public class Middle extends Kartya{
                 MainActivity.middle.setImageResource(R.mipmap.kijelolt);
             }
         }
+        else {
+            if(!selected){
+                //kocsi
+                if(isNyertes()){
+                    MainActivity.middle.setImageResource(R.mipmap.kocsi);
+                }
+                else{
+                    MainActivity.middle.setImageResource(R.mipmap.kecske);
+                }
+            }
+
+            else{
+                if(isNyertes()){
+                    MainActivity.middle.setImageResource(R.mipmap.kocsiselected);
+                    MainActivity.nyeresekSzama++;
+                    MainActivity.eredmeny.setText("Win");
+                }
+                else {
+                    MainActivity.middle.setImageResource(R.mipmap.kecskeselected);
+                    MainActivity.eredmeny.setText("Lose");
+                }
+            }
+        }
     }
 
 
