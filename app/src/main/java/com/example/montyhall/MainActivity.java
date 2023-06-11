@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private int nyertesSzam;
 
-    
+
 
     public static boolean nyitva;
 
