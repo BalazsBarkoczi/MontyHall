@@ -22,15 +22,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //kepek
 
     @SuppressLint("StaticFieldLeak")
-    public static ImageView left;
+    private static ImageView left;
     @SuppressLint("StaticFieldLeak")
-    public static ImageView middle;
+    private static ImageView middle;
     @SuppressLint("StaticFieldLeak")
-    public static ImageView right;
+    private static ImageView right;
 
     //texts
     @SuppressLint("StaticFieldLeak")
-    public static TextView eredmeny;
+    private static TextView eredmeny;
     private TextView jatekSzama;
     private TextView wins;
 
@@ -47,6 +47,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Kezelo kezelo;
     private boolean ujJatek;
+
+
+    //getters
+    public static ImageView getLeft(){
+        return left;
+    }
+
+    public static ImageView getMiddle(){
+        return middle;
+    }
+
+    public static ImageView getRight(){
+        return right;
+    }
+
+    public static TextView getEredmeny(){
+        return eredmeny;
+    }
 
 
     //Main

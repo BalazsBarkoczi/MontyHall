@@ -11,32 +11,32 @@ public class Middle extends Kartya{
     public void Kirajzol() {
         if(!MainActivity.nyitva){
             if(!selected){
-                MainActivity.middle.setImageResource(R.mipmap.megforditott);
+                MainActivity.getMiddle().setImageResource(R.mipmap.megforditott);
             }
             else {
-                MainActivity.middle.setImageResource(R.mipmap.kijelolt);
+                MainActivity.getMiddle().setImageResource(R.mipmap.kijelolt);
             }
         }
         else {
             if(!selected){
                 //kocsi
                 if(isNyertes()){
-                    MainActivity.middle.setImageResource(R.mipmap.kocsi);
+                    MainActivity.getMiddle().setImageResource(R.mipmap.kocsi);
                 }
                 else{
-                    MainActivity.middle.setImageResource(R.mipmap.kecske);
+                    MainActivity.getMiddle().setImageResource(R.mipmap.kecske);
                 }
             }
 
             else{
                 if(isNyertes()){
-                    MainActivity.middle.setImageResource(R.mipmap.kocsiselected);
+                    MainActivity.getMiddle().setImageResource(R.mipmap.kocsiselected);
                     MainActivity.nyeresekSzama++;
-                    MainActivity.eredmeny.setText("Win");
+                    MainActivity.getEredmeny().setText("Win");
                 }
                 else {
-                    MainActivity.middle.setImageResource(R.mipmap.kecskeselected);
-                    MainActivity.eredmeny.setText("Lose");
+                    MainActivity.getMiddle().setImageResource(R.mipmap.kecskeselected);
+                    MainActivity.getEredmeny().setText("Lose");
                 }
             }
         }
@@ -49,6 +49,6 @@ public class Middle extends Kartya{
     //Kecske nyitas
     @Override
     public void kecskeNyitas(){
-        MainActivity.middle.setImageResource(R.mipmap.kecske);
+        MainActivity.getMiddle().setImageResource(R.mipmap.kecske);
     }
 }

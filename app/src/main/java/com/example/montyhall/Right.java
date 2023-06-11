@@ -11,33 +11,33 @@ public class Right extends Kartya{
     public void Kirajzol() {
         if(!MainActivity.nyitva){
             if(!selected){
-                MainActivity.right.setImageResource(R.mipmap.megforditott);
+                MainActivity.getRight().setImageResource(R.mipmap.megforditott);
             }
             else {
-                MainActivity.right.setImageResource(R.mipmap.kijelolt);
+                MainActivity.getRight().setImageResource(R.mipmap.kijelolt);
             }
         }
         else {
             if(!selected){
                 //kocsi
                 if(isNyertes()){
-                    MainActivity.right.setImageResource(R.mipmap.kocsi);
+                    MainActivity.getRight().setImageResource(R.mipmap.kocsi);
                 }
                 else{
-                    MainActivity.right.setImageResource(R.mipmap.kecske);
+                    MainActivity.getRight().setImageResource(R.mipmap.kecske);
                 }
             }
 
             else{
                 if(isNyertes()){
-                    MainActivity.right.setImageResource(R.mipmap.kocsiselected);
+                    MainActivity.getRight().setImageResource(R.mipmap.kocsiselected);
                     MainActivity.nyeresekSzama++;
-                    MainActivity.eredmeny.setText("Win");
+                    MainActivity.getEredmeny().setText("Win");
 
                 }
                 else {
-                    MainActivity.right.setImageResource(R.mipmap.kecskeselected);
-                    MainActivity.eredmeny.setText("Lose");
+                    MainActivity.getRight().setImageResource(R.mipmap.kecskeselected);
+                    MainActivity.getEredmeny().setText("Lose");
                 }
             }
         }
@@ -49,6 +49,6 @@ public class Right extends Kartya{
     //Kecske nyitas
     @Override
     public void kecskeNyitas(){
-        MainActivity.right.setImageResource(R.mipmap.kecske);
+        MainActivity.getRight().setImageResource(R.mipmap.kecske);
     }
 }

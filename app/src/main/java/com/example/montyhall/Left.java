@@ -11,31 +11,33 @@ public class Left extends Kartya{
     public void Kirajzol() {
         if(!MainActivity.nyitva){
             if(!selected){
-                MainActivity.left.setImageResource(R.mipmap.megforditott);
+                MainActivity.getLeft().setImageResource(R.mipmap.megforditott);
             }
             else  {
-                MainActivity.left.setImageResource(R.mipmap.kijelolt);
+                MainActivity.getLeft().setImageResource(R.mipmap.kijelolt);
             }
         }
         else {
+
+
             if(!selected){
                 //kocsi
                 if(isNyertes()){
-                    MainActivity.left.setImageResource(R.mipmap.kocsi);
+                    MainActivity.getLeft().setImageResource(R.mipmap.kocsi);
                 }
                 else{
-                    MainActivity.left.setImageResource(R.mipmap.kecske);
+                    MainActivity.getLeft().setImageResource(R.mipmap.kecske);
                 }
             }
             else{
                 if(isNyertes()){
-                    MainActivity.left.setImageResource(R.mipmap.kocsiselected);
+                    MainActivity.getLeft().setImageResource(R.mipmap.kocsiselected);
                     MainActivity.nyeresekSzama++;
-                    MainActivity.eredmeny.setText("Win");
+                    MainActivity.getEredmeny().setText("Win");
                 }
                 else {
-                    MainActivity.left.setImageResource(R.mipmap.kecskeselected);
-                    MainActivity.eredmeny.setText("Lose");
+                    MainActivity.getLeft().setImageResource(R.mipmap.kecskeselected);
+                    MainActivity.getEredmeny().setText("Lose");
                 }
             }
         }
@@ -47,6 +49,6 @@ public class Left extends Kartya{
     //Kecske nyitas
     @Override
     public void kecskeNyitas(){
-        MainActivity.left.setImageResource(R.mipmap.kecske);
+        MainActivity.getLeft().setImageResource(R.mipmap.kecske);
     }
 }

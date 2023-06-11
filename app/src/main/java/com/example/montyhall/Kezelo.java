@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Kezelo {
 
-    public ArrayList<Kartya> kartyak;
+    private final ArrayList<Kartya> kartyak;
     private boolean vanSelected;
 
     public Kezelo(){
