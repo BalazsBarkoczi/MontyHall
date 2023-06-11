@@ -9,7 +9,7 @@ public class Left extends Kartya{
 
     @Override
     public void Kirajzol() {
-        if(!MainActivity.nyitva){
+        if(!MainActivity.getNyitva()){
             if(!selected){
                 MainActivity.getLeft().setImageResource(R.mipmap.megforditott);
             }
@@ -32,7 +32,7 @@ public class Left extends Kartya{
             else{
                 if(isNyertes()){
                     MainActivity.getLeft().setImageResource(R.mipmap.kocsiselected);
-                    MainActivity.nyeresekSzama++;
+                    MainActivity.nyeresekSzamaNovel();
                     MainActivity.getEredmeny().setText("Win");
                 }
                 else {

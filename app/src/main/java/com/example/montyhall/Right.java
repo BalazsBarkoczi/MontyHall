@@ -9,7 +9,7 @@ public class Right extends Kartya{
     @SuppressLint("SetTextI18n")
     @Override
     public void Kirajzol() {
-        if(!MainActivity.nyitva){
+        if(!MainActivity.getNyitva()){
             if(!selected){
                 MainActivity.getRight().setImageResource(R.mipmap.megforditott);
             }
@@ -31,7 +31,7 @@ public class Right extends Kartya{
             else{
                 if(isNyertes()){
                     MainActivity.getRight().setImageResource(R.mipmap.kocsiselected);
-                    MainActivity.nyeresekSzama++;
+                    MainActivity.nyeresekSzamaNovel();
                     MainActivity.getEredmeny().setText("Win");
 
                 }

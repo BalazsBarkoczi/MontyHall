@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    public static boolean nyitva;
+    private static boolean nyitva;
 
-    public static int nyeresekSzama;
-    public static int jatekokSzamaInt;
+    private static int nyeresekSzama;
+    private static int jatekokSzamaInt;
 
     private Kezelo kezelo;
     private boolean ujJatek;
@@ -65,6 +65,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static TextView getEredmeny(){
         return eredmeny;
     }
+
+    public static boolean getNyitva(){
+        return nyitva;
+    }
+
+    public static void setNyitva(boolean l){
+        nyitva = l;
+
+    }
+
+    public static void nyeresekSzamaNovel(){
+        nyeresekSzama++;
+    }
+
+
 
 
     //Main

@@ -9,7 +9,7 @@ public class Middle extends Kartya{
     @SuppressLint("SetTextI18n")
     @Override
     public void Kirajzol() {
-        if(!MainActivity.nyitva){
+        if(!MainActivity.getNyitva()){
             if(!selected){
                 MainActivity.getMiddle().setImageResource(R.mipmap.megforditott);
             }
@@ -31,7 +31,7 @@ public class Middle extends Kartya{
             else{
                 if(isNyertes()){
                     MainActivity.getMiddle().setImageResource(R.mipmap.kocsiselected);
-                    MainActivity.nyeresekSzama++;
+                    MainActivity.nyeresekSzamaNovel();
                     MainActivity.getEredmeny().setText("Win");
                 }
                 else {
